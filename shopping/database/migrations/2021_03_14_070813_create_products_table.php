@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->text('content');
             $table->integer('user_id');
             $table->integer('category_id');
+
             $table->timestamps();
         });
     }

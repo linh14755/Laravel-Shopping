@@ -16,13 +16,12 @@ $baseurl = config('app.base_url');
                     <div class="carousel-inner">
                         @foreach($sliders as $key => $slider)
                             <div class="item {{$key==0 ? 'active':''}}">
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <h1><span>E</span>-SHOPPER</h1>
                                     <h2>{{$slider->name}}</h2>
                                     <p>{{$slider->description}}</p>
-                                    <button type="button" class="btn btn-default get">Get it now</button>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-8">
                                     <img src="{{$baseurl.$slider->image_path}}" class="girl img-responsive" alt=""/>
                                 </div>
                             </div>

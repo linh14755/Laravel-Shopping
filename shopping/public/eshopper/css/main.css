@@ -67,7 +67,7 @@ a#scrollUp i {
 **************************/
 
 .header_top {
-    background: none repeat scroll 0 0 #41b4b8;
+    background: none repeat scroll 0 0 #9ad8db;
 }
 
 .contactinfo ul li:first-child {
@@ -545,7 +545,7 @@ ul.sub-menu {
 }
 
 .footer-bottom {
-    background: #D6D6D0;
+    background: #9ad8db;
     padding-top: 10px;
 }
 
@@ -945,7 +945,7 @@ h2.title {
 
 
 .add-to-cart {
-    background: #F5F5ED;
+    background: #9ad8db;
     border: 0 none;
     border-radius: 0;
     color: #696763;
@@ -1899,7 +1899,6 @@ h2.title {
 
 .form-two, .form-one {
     float: left;
-    width: 47%
 }
 
 

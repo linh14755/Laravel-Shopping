@@ -2,7 +2,7 @@
     <h2 class="title text-center">@if(count($products) != 0){{$products[0]->category->name}}</h2>
     @foreach($products as $product)
         <div class="col-sm-4">
-            <div class="product-image-wrapper" style="height: 335px">
+            <div class="product-image-wrapper" style="height: 400px">
                 <div class="single-products">
                     <div class="productinfo text-center">
                         <img src="{{config('app.base_url').$product->feature_image_path}}"
@@ -22,7 +22,11 @@
                     </div>
 
                 </div>
-
+                <div class="choose">
+                    <ul class="nav nav-pills nav-justified">
+                        <li><a href="{{route('product.detailsProduct',['id'=>$product->id])}}"><i class="fa fa-plus-square"></i>Chi tiết sản phẩm</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     @endforeach

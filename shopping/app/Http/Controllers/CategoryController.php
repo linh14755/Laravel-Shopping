@@ -78,17 +78,4 @@ class CategoryController extends Controller
 
         return redirect()->route('categories.index');
     }
-
-    //front-end
-    public function selectcategory($slug, $categoryId)
-    {
-        $sliders = $this->slider->latest()->get();
-        $categorys = $this->category->where('parent_id', 0)->get();
-        $categoryLimits = $this->category->where('parent_id', 0)->take(3)->get();
-        $products = $this->product->where('category_id', $categoryId)->paginate(9);
-        //Lấy số lượng sản phẩm đã thêm để hiển thị lên thẻ cart
-        $cartsNumber = count(session()->get('cart'));
-
-        return view('frontend.product.category.list', compact('sliders', 'categorys', 'categoryLimits', 'products', 'categoryId','cartsNumber'));
-    }
 }

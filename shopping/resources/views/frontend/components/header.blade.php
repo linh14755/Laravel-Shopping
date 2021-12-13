@@ -41,16 +41,53 @@
                 <div class="col-sm-8">
                     <div class="shop-menu pull-right">
                         <ul class="nav navbar-nav">
-                            <li><a href="{{route('product.showCart')}}"><i
-                                                                           class="fa fa-shopping-cart"></i>
+                            <li>
+                                <?php
+                                $customer_id = \Illuminate\Support\Facades\Session::get('customer_id');
+                                $shipping_id = \Illuminate\Support\Facades\Session::get('shipping_id');
+                                if (isset($customer_id) && !isset($shipping_id)) {
+                                ?>
+                                <a href="{{route('product.checkout')}}"><i class="fa fa-crosshairs"></i> Thanh toán</a>
+                                <?php
+                                }
+                                elseif (isset($customer_id) && isset($shipping_id)) {
+                                ?>
+                                <a href="{{route('product.payment')}}"><i class="fa fa-crosshairs"></i> Thanh toán</a>
+                                <?php
+                                }
+                                else{
+                                ?>
+                                <a href="{{route('product.loginCheckout')}}"><i class="fa fa-crosshairs"></i> Thanh toán</a>
+
+                                <?php
+                                }
+                                ?>
+                            </li>
+                            <li>
+                                <a href="{{route('product.showCart')}}">
+                                    <i class="fa fa-shopping-cart"></i>
                                     @if(isset($cartsNumber) &&$cartsNumber > 0)
-                                        <span id="span-cart" class="badge badge-danger navbar-badge">{{$cartsNumber}}</span>
+                                        <span id="span-cart"
+                                              class="badge badge-danger navbar-badge">{{$cartsNumber}}</span>
                                     @else
                                         <span id="span-cart" class="badge badge-danger navbar-badge"></span>
                                     @endif
-                                    Cart</a>
+                                    Giỏ hàng
+                                </a>
                             </li>
-                            <li><a href="#"><i class="fa fa-lock"></i> Login</a></li>
+                            <?php
+                            $customer_id = \Illuminate\Support\Facades\Session::get('customer_id');
+                            if (!isset($customer_id)) {
+                            ?>
+                            <li><a href="{{route('product.loginCheckout')}}"><i class="fa fa-lock"></i> Đăng nhập</a>
+                            <?php
+                            }else{
+                            ?>
+                            <li><a href="{{route('product.logoutCheckout')}}"><i class="fa fa-lock"></i> Đăng xuất - {{\App\Customer::find($customer_id)->name}}</a>
+                            <?php
+                            }
+                            ?>
+
                         </ul>
                     </div>
                 </div>

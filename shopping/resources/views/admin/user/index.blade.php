@@ -36,6 +36,7 @@
                                 <th scope="col">ID</th>
                                 <th scope="col">Tên</th>
                                 <th scope="col">Email</th>
+                                <th scope="col">Loại người dùng</th>
                                 <th scope="col">Action</th>
 
                             </tr>
@@ -46,6 +47,13 @@
                                     <th scope="row">{{$value->id}}</th>
                                     <td>{{$value->name}}</td>
                                     <td>{{$value->email}}</td>
+                                    <td>
+                                        @if(!$value->roles->isEmpty())
+                                        @foreach($value->roles as $role)
+                                            <span>{{$role->name}}</span> |
+                                        @endforeach
+                                            @endif
+                                    </td>
 
                                     <td>
                                         @can('user-edit')

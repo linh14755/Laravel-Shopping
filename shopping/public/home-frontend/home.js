@@ -1,6 +1,9 @@
 $(function () {
     $('.add-to-cart').on('click', addToCart);
+    $('.update-carts').on('click', updateCart);
+    $('.delete-carts').on('click', deleteCart);
 });
+
 
 function addToCart(event) {
     event.preventDefault();
@@ -12,11 +15,9 @@ function addToCart(event) {
         url: url,
         success: function (data) {
             if (data.code == 200) {
-                Swal.fire('Thêm vào giỏ hàng thành công!')
+                alertify.success('Thêm vào giỏ hàng thành công');
                 if (data.cartNumber > 0) {
-                    var cartNumber = data.cartNumber;
-                    var htmlObj = document.getElementById('span-cart');
-                    htmlObj.innerHTML = cartNumber;
+                    $('#span-cart').html(data.cartNumber);
                 }
             }
         },
@@ -25,3 +26,48 @@ function addToCart(event) {
         }
     });
 };
+
+
+function deleteCart(event) {
+    event.preventDefault();
+    let url = $(this).data('url');
+    $.ajax({
+        type: 'GET',
+        url: url,
+        success: function (data) {
+            if (data.code === 200) {
+                $('.cart-wrapper').html(data.cart_component);
+
+                if (data.cartNumber != null) {
+                    $('#span-cart').html(data.cartNumber);
+                }
+            }
+        },
+        error: function () {
+
+        }
+    });
+
+}
+
+function updateCart(event) {
+    event.preventDefault();
+    let urlCart = $('.update-cart-url').data('url');
+    let idCart = $(this).data('id');
+    let quantity = $(this).parents('tr').find('input.quantity').val();
+    $.ajax({
+        type: 'GET',
+        url: urlCart,
+        data: {id: idCart, quantity: quantity},
+        success: function (data) {
+            if (data.code === 200) {
+                Swal.fire('Cập nhật thành công!')
+                // console.log(data.cart_component);
+                $('.cart-wrapper').html(data.cart_component);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}

@@ -41,24 +41,26 @@ class AdminProductController extends Controller
         $this->recusive = new Recusive($data);
     }
 
+    //Trả về html view hiển thị danh sách Product
     public function index()
     {
         $product = $this->product->latest()->paginate(20);
         return view('admin.product.index', compact('product'));
     }
-
+    //Trả về html view hiển thị trang thêm Product
     public function create()
     {
         $htmlOption = $this->getcategory($parent_id = '');
         return view('admin.product.add', compact('htmlOption'));
     }
-
+    //Bỏ
     public function getcategory($parent_id)
     {
         $htmlOption = $this->recusive->categoryRecusive($parent_id);
         return $htmlOption;
     }
-
+    //Nhận vào request các thông tin sản phẩm
+    //Sau khi thêm sản phẩm trả về html view index ở trên
     public function store(ProductAddRequest $request)
     {
         try {
@@ -115,14 +117,16 @@ class AdminProductController extends Controller
 
         }
     }
-
+    //Nhận vào id sản phẩm được sửa
+    //Hiển thị trang edit có thông tin tương ứng với id
     public function edit($id)
     {
         $product = $this->product->find($id);
         $htmlOption = $this->recusive->categoryRecusive($parent_id = $product->category_id);
         return view('admin.product.edit', compact('htmlOption', 'product'));
     }
-
+    //Cập nhật thông tin sp mới từ request gửi lên với id
+    //Sau khi sửa thành công trả về html view index
     public function update(ProductAddRequest $request, $id)
     {
         try {
@@ -176,51 +180,11 @@ class AdminProductController extends Controller
             return redirect()->route('product.create');
         }
     }
-
+    //Xóa sản phẩm theo id được truyền vào
+    //Trả về json 200 (success) cho ajax nếu xóa thành công
+    //Trả về json 200 (fail) cho ajax nếu xóa không thành công
     public function delete($id)
     {
         return $this->deleteModelTrait($id, $this->product);
-    }
-
-
-    //front-end
-    public function addToCart($id)
-    {
-//        session()->flush('cart'); //xoa session
-        $product = $this->product->find($id);
-        $cart = session()->get('cart'); // lấy giá trị trong session để thêm quantity
-        if (isset($cart[$id])) {
-            $cart[$id]['quantity'] = $cart[$id]['quantity'] + 1;
-        } else {
-            $cart[$id] = [
-                'name' => $product->name,
-                'price' => $product->price,
-                'quantity' => 1,
-                'image' => $product->feature_image_path
-            ];
-        }
-        // Tạo session với key => value
-        session()->put('cart', $cart);
-
-        //Lấy số lượng sản phẩm đã thêm để hiển thị lên thẻ cart
-        $cartsNumber = count(session()->get('cart'));
-
-        //sau khi tạo xong session thì return cho ajax thông báo cho người dùng
-        return response()->json([
-            'code' => 200,
-            'message' => 'success',
-            'cartNumber' => $cartsNumber
-        ], 200);
-    }
-
-    public function showCart()
-    {
-        $categorys = $this->category->where('parent_id', 0)->get();
-        $categoryLimits = $this->category->where('parent_id', 0)->take(3)->get();
-        $carts = session()->get('cart');
-        //Lấy số lượng sản phẩm đã thêm để hiển thị lên thẻ cart
-        $cartsNumber = count(session()->get('cart'));
-
-        return view('frontend.product.cart.cart', compact('categorys', 'categoryLimits', 'carts','cartsNumber'));
     }
 }

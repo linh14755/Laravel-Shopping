@@ -174,6 +174,7 @@
 <body>
 <div class="login">
     <h1>Login</h1>
+
     <form id="login-form" action="" method="post">
         @csrf
         <input class="inputt" type="text" name="email" placeholder="Username" required="required"/>

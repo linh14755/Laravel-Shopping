@@ -11,6 +11,22 @@
 @section('js')
     <script src="{{asset('vendors/sweetAlert2/sweetalert2@10.js')}}"></script>
     <script src="{{asset('admins/main.js')}}"></script>
+    <script>
+        $(function () {
+            $(document).on('keyup', '#myInputSearch', function () {
+                var keyword = $(this).val();
+                $.ajax({
+                    type: "get",
+                    url: $(this).data('url'),
+                    data: {keyword: keyword},
+                    dataType: "json",
+                    success: function (response) {
+                        $('#search-result').html(response);
+                    }
+                });
+            });
+        });
+    </script>
 @endsection
 
 
@@ -28,9 +44,12 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="input-group p-2 col-md-11">
-                                <div class="form-outline col-md-4">
-                                    <input type="search" id="myInput" onkeyup="myFunction()" class="form-control"
-                                           placeholder="Tìm kiếm"/>
+                                <div class="form-outline col-md-6 position-relative">
+                                                                        <input type="search" id="myInput" onkeyup="myFunction()" class="form-control"
+                                                                               placeholder="Tìm kiếm"/>
+{{--                                    <input data-url="{{route('product.searchbar')}}" type="search" id="myInputSearch" class="form-control"--}}
+{{--                                           placeholder="Tìm kiếm"/>--}}
+{{--                                    <div id="search-result" class="position-absolute list-group bg-white wrapper-full-page rounded-t-none shadow-lg"></div>--}}
                                 </div>
                             </div>
                             @can('product-add')
@@ -58,8 +77,8 @@
                             <tr>
                                 <th scope="row">{{$value->id}}</th>
                                 <th scope="row">{{$value->name}}</th>
-                                <th scope="row">{{number_format($value->price)}}</th>
-                                <th scope="row"><img class="product_image_150_100"
+                                <th scope="row">{{number_format($value->price,0,',','.')}}</th>
+                                <th scope="row"><img style="height: 80px;width: 80px"
                                                      src="{{$value->feature_image_path}}" alt=""></th>
                                 <th scope="row">{{optional($value->category)->name}}</th>
                                 <td>

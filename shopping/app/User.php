@@ -46,12 +46,13 @@ class User extends Authenticatable
 
     public function checkPermissionAccess($permissionCheck)
     {
+
         //Lay tat ca cac quyen cua user dang login vao he thong
         //So sanh gia tri dua vao cua route hien tai xem co ton tao trong cac quyen hay khong
         $roles = auth()->user()->roles;
         foreach ($roles as $role) {
             $permissions = $role->permissions;
-            if($permissions->contains('key_code',$permissionCheck)){
+            if ($permissions->contains('key_code', $permissionCheck)) {
                 return true;
             }
         }

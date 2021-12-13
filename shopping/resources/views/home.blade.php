@@ -15,7 +15,7 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <h1 style="text-transform: uppercase; color: #41b4b8;">Hệ thống quản lý website thương mại điện tử "first time :)"</h1>
+                    <h1 style="text-transform: uppercase; color: #41b4b8;">Hệ thống quản lý website thương mại điện tử</h1>
                 </div>
             </div>
             <!-- /.row -->

@@ -70,11 +70,19 @@ class AdminUserController extends Controller
     {
         try {
             DB::beginTransaction();
-            $this->user->find($id)->update([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-            ]);
+            if ($request->password != '') {
+                $this->user->find($id)->update([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password),
+                ]);
+            } else {
+                $this->user->find($id)->update([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                ]);
+            }
+
 
             $user = $this->user->find($id);
             $user->roles()->sync($request->role_id);
@@ -90,6 +98,7 @@ class AdminUserController extends Controller
 
     public function delete($id)
     {
+
         return $this->deleteModelTrait($id, $this->user);
     }
 }

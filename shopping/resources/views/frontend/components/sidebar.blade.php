@@ -32,9 +32,9 @@
         </div><!--/category-products-->
 
 
-        <div class="shipping text-center"><!--shipping-->
-            <img src="{{asset('eshopper/images/home/sidebar_right.png')}}" alt=""/>
-        </div><!--/shipping-->
+{{--        <div class="shipping text-center"><!--shipping-->--}}
+{{--            <img src="{{asset('eshopper/images/home/sidebar_right.png')}}" alt=""/>--}}
+{{--        </div><!--/shipping-->--}}
 
     </div>
 </div>

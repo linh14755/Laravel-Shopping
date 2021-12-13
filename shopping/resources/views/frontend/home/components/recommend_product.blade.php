@@ -13,13 +13,17 @@
                                 <div class="single-products">
                                     <div class="productinfo text-center">
                                         <img
-                                            src="{{config('app.base_url').$productsRecommendItem->feature_image_path}}" style="width: 200px;height: 200px"/>
-                                        <h2>{{number_format($productsRecommendItem->price)}} VNĐ</h2>
+                                            src="{{config('app.base_url').$productsRecommendItem->feature_image_path}}" style="width: 170px;height: 170px"/>
+                                        <h2>{{number_format($productsRecommendItem->price,0,',','.')}} VNĐ</h2>
                                         <p>{{$productsRecommendItem->name}}</p>
                                         <a data-url="{{route('product.addToCart',['id'=>$productsRecommendItem->id])}}" class="btn btn-default add-to-cart"><i
                                                 class="fa fa-shopping-cart"></i>Add to cart</a>
                                     </div>
-
+                                </div>
+                                <div class="choose">
+                                    <ul class="nav nav-pills nav-justified">
+                                        <li><a href="{{route('product.detailsProduct',['id'=>$productsRecommendItem->id])}}"><i class="fa fa-plus-square"></i>Chi tiết sản phẩm</a></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>

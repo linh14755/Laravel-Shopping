@@ -18,6 +18,7 @@ class PermissionGateAndPolicyAccess
         $this->defineGateUser();
         $this->defineGatePermission();
         $this->defineGateRole();
+        $this->defineGateOrder();
     }
 
     private function defineGateCategory()
@@ -31,17 +32,17 @@ class PermissionGateAndPolicyAccess
     private function defineGateProduct()
     {
         Gate::define('product-list', function ($user) {
-            return $user->checkPermissionAccess('product_list');
+            return $user->checkPermissionAccess('product-list');
         });
 
         Gate::define('product-add', function ($user) {
-            return $user->checkPermissionAccess('product_add');
+            return $user->checkPermissionAccess('product-add');
         });
 
 
         Gate::define('product-edit', function ($user, $id) {
             $product = Product::find($id);
-            if ($user->checkPermissionAccess('product_edit' && $product->user_id === $user->id)) {
+            if ($user->checkPermissionAccess('product-edit' && $product->user_id === $user->id)) {
                 return true;
             }
             return false;
@@ -49,109 +50,119 @@ class PermissionGateAndPolicyAccess
         });
 
         Gate::define('product-delete', function ($user) {
-            return $user->checkPermissionAccess('product_delete');
+            return $user->checkPermissionAccess('product-delete');
         });
     }
 
     private function defineGateMenu()
     {
         Gate::define('menu-list', function ($user) {
-            return $user->checkPermissionAccess('menu_list');
+            return $user->checkPermissionAccess('menu-list');
         });
 
         Gate::define('menu-add', function ($user) {
-            return $user->checkPermissionAccess('menu_add');
+            return $user->checkPermissionAccess('menu-add');
         });
 
         Gate::define('menu-edit', function ($user) {
-            return $user->checkPermissionAccess('menu_edit');
+            return $user->checkPermissionAccess('menu-edit');
         });
 
         Gate::define('menu-delete', function ($user) {
-            return $user->checkPermissionAccess('menu_delete');
+            return $user->checkPermissionAccess('menu-delete');
         });
     }
 
     private function defineGateSlider()
     {
         Gate::define('slider-list', function ($user) {
-            return $user->checkPermissionAccess('slider_list');
+            return $user->checkPermissionAccess('slider-list');
         });
 
         Gate::define('slider-add', function ($user) {
-            return $user->checkPermissionAccess('slider_add');
+            return $user->checkPermissionAccess('slider-add');
         });
 
         Gate::define('slider-edit', function ($user) {
-            return $user->checkPermissionAccess('slider_edit');
+            return $user->checkPermissionAccess('slider-edit');
         });
 
         Gate::define('slider-delete', function ($user) {
-            return $user->checkPermissionAccess('slider_delete');
+            return $user->checkPermissionAccess('slider-delete');
         });
     }
 
     private function defineGateSetting()
     {
         Gate::define('setting-list', function ($user) {
-            return $user->checkPermissionAccess('setting_list');
+            return $user->checkPermissionAccess('setting-list');
         });
 
         Gate::define('setting-add', function ($user) {
-            return $user->checkPermissionAccess('setting_add');
+            return $user->checkPermissionAccess('setting-add');
         });
 
         Gate::define('setting-edit', function ($user) {
-            return $user->checkPermissionAccess('setting_edit');
+            return $user->checkPermissionAccess('setting-edit');
         });
 
         Gate::define('setting-delete', function ($user) {
-            return $user->checkPermissionAccess('setting_delete');
+            return $user->checkPermissionAccess('setting-delete');
         });
     }
 
     private function defineGateUser()
     {
         Gate::define('user-list', function ($user) {
-            return $user->checkPermissionAccess('user_list');
+            return $user->checkPermissionAccess('user-list');
         });
 
         Gate::define('user-add', function ($user) {
-            return $user->checkPermissionAccess('user_add');
+            return $user->checkPermissionAccess('user-add');
         });
 
         Gate::define('user-edit', function ($user) {
-            return $user->checkPermissionAccess('user_edit');
+            return $user->checkPermissionAccess('user-edit');
         });
 
         Gate::define('user-delete', function ($user) {
-            return $user->checkPermissionAccess('user_delete');
+            return $user->checkPermissionAccess('user-delete');
         });
     }
 
     private function defineGateRole()
     {
-            Gate::define('role-list', function ($user) {
-            return $user->checkPermissionAccess('role_list');
+        Gate::define('role-list', function ($user) {
+            return $user->checkPermissionAccess('role-list');
         });
 
         Gate::define('role-add', function ($user) {
-            return $user->checkPermissionAccess('role_add');
+            return $user->checkPermissionAccess('role-add');
         });
 
         Gate::define('role-edit', function ($user) {
-            return $user->checkPermissionAccess('role_edit');
+            return $user->checkPermissionAccess('role-edit');
         });
 
         Gate::define('role-delete', function ($user) {
-            return $user->checkPermissionAccess('role_delete');
+            return $user->checkPermissionAccess('role-delete');
         });
     }
 
     private function defineGatePermission()
     {
         Gate::define('permission-list', function ($user) {
-            return $user->checkPermissionAccess('permission_list');
+            return $user->checkPermissionAccess('permission-list');
         });
     }
+
+    private function defineGateOrder(){
+        Gate::define('order-list', function ($user) {
+            return $user->checkPermissionAccess('order-list');
+        });
+        Gate::define('order-view', function ($user) {
+            return $user->checkPermissionAccess('order-view');
+        });
+    }
+
 }

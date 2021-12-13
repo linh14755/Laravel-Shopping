@@ -13,6 +13,7 @@
     <link href="{{asset('eshopper/css/animate.css')}}" rel="stylesheet">
     <link href="{{asset('eshopper/css/main.css')}}" rel="stylesheet">
     <link href="{{asset('eshopper/css/responsive.css')}}" rel="stylesheet">
+    <link href="{{asset('vendors/alertify/css/alertify.css')}}" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="{{asset('eshopper/js/html5shiv.js')}}"></script>
     <script src="{{asset('eshopper/js/respond.min.js')}}"></script>
@@ -25,6 +26,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72"
           href="{{asset('eshopper/images/ico/apple-touch-icon-72-precomposed.png')}}">
     <link rel="apple-touch-icon-precomposed" href="{{asset('eshopper/images/ico/apple-touch-icon-57-precomposed.png')}}">
+
 
 
     @yield('css')
@@ -44,6 +46,7 @@
 <script src="{{asset('eshopper/js/jquery.prettyPhoto.js')}}"></script>
 <script src="{{asset('eshopper/js/main.js')}}"></script>
 <script src="{{asset('vendors/sweetAlert2/sweetalert2@10.js')}}"></script>
+<script src="{{asset('vendors/alertify/alertify.js')}}"></script>
 @yield('js')
 </body>
 </html>
